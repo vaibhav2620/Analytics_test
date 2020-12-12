@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>timer</title>
+    <style>
+        body {
+          background-image: url('timer.png');
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: 100% 100%;
+          position: relative;
+  font-family: -apple-system, 
+    BlinkMacSystemFont, 
+    "Segoe UI", 
+    Roboto, 
+    Oxygen-Sans, 
+    Ubuntu, 
+    Cantarell, 
+    "Helvetica Neue", 
+    sans-serif;
+        }
+
+/* general styling */
+* {
+  border-radius: 10px;
+  padding: 0%;
+}
+
+.container {
+  color: #333;
+  margin-left:240px;
+  margin-top:270px;
+  margin-right: 530px;
+  text-align: center;
+  background-color:rgb(211, 208, 203);
+  border:1px solid black;
+}
+
+h1 {
+  font-weight: normal;
+  letter-spacing: .125rem;
+  text-transform: uppercase;
+}
+
+li {
+  display: inline-block;
+  font-size: 1.5em;
+  list-style-type: none;
+  padding: 1em;
+  text-transform: uppercase;
+  background-color: white;
+}
+
+li span {
+  display: block;
+  font-size: 3.5rem;
+}
+
+.message {
+  font-size: 3rem;
+}
+
+#content {
+  display: none;
+  padding: 1rem;
+}
+
+@media all and (max-width: 100px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  li {
+    font-size: 1.125rem;
+    padding: .75rem;
+  }
+  
+  li span {
+    font-size: 1.375rem;
+  }
+}
+    </style>
+</head>
+<body>
+   <a href="login.html"> <div class="container">
+
+        <div id="countdown">
+          <ul>
+            <li><span id="days"></span>days</li>
+            <li><span id="hours"></span>Hours</li>
+            <li><span id="minutes"></span>Minutes</li>
+            <li><span id="seconds"></span>Seconds</li>
+          </ul>
+        </div>
+      </div>
+    </a>
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
+<script>(function () {
+    const second = 1000,
+          minute = second * 60,
+          hour = minute * 60,
+          day = hour * 24;
+  
+    let birthday = "Sep 30, 2021 00:00:00",
+        countDown = new Date(birthday).getTime(),
+        x = setInterval(function() {    
+  
+          let now = new Date().getTime(),
+              distance = countDown - now;
+  
+          document.getElementById("days").innerText = Math.floor(distance / (day)),
+            document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+            document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
+            document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+  
+          //do something later when date is reached
+          if (distance < 0) {
+            let headline = document.getElementById("headline"),
+                countdown = document.getElementById("countdown"),
+                content = document.getElementById("content");
+  
+            headline.innerText = "It's my birthday!";
+            countdown.style.display = "none";
+            content.style.display = "block";
+  
+            clearInterval(x);
+          }
+          //seconds
+        }, 0)
+    }());</script>
+</body>
+</html>
